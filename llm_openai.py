@@ -19,16 +19,20 @@ from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.chains.summarize import load_summarize_chain
 import textwrap
 from langchain import HuggingFaceHub
-#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
-huggingfacehub_api_token="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"
 
+# Setting Env
+if st.secrets["OPENAI_API_KEY"] is not None:
+    os.environ["OPENAI_API_KEY"] = st.secrets["OPENAI_API_KEY"]
+else:
+    os.environ["OPENAI_API_KEY"] = os.environ.get("OPENAI_API_KEY")
 
+#huggingfacehub_api_token=OPENAI_API_KEY
 
 #Open source LLM block
 def open_source_api(template, value):
     
     repo_id = "HuggingFaceH4/zephyr-7b-beta"
-    llama_llm = HuggingFaceHub(huggingfacehub_api_token=huggingfacehub_api_token,
+    llama_llm = HuggingFaceHub(
                          repo_id=repo_id,
                          model_kwargs={"temperature":0.1, "max_new_tokens":1000})
     prompt = PromptTemplate(template=template, input_variables=['input_file_text'])

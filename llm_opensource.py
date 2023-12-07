@@ -13,11 +13,15 @@ import pandas as pd
 import os
 from openpyxl import load_workbook
 
+# Setting Config for Llama-2
+login(token=st.secrets["HUGGINGFACEHUB_API_TOKEN"])
+os.environ["HUGGINGFACEHUB_API_TOKEN"] = st.secrets["HUGGINGFACEHUB_API_TOKEN"]
+
 #Open source LLM block
 def open_source_api(template, value):
-    huggingfacehub_api_token="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"
+    #huggingfacehub_api_token=huggingfacehub_api_token,
     repo_id = "HuggingFaceH4/zephyr-7b-beta"
-    llama_llm = HuggingFaceHub(huggingfacehub_api_token=huggingfacehub_api_token,
+    llama_llm = HuggingFaceHub(
                          repo_id=repo_id,
                          model_kwargs={"temperature":0.1, "max_new_tokens":1000})
     prompt = PromptTemplate(template=template, input_variables=['input_file_text'])
