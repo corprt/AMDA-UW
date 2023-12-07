@@ -1,0 +1,147 @@
+Model Specification:
+  Technical Summary:
+    Statistical Estimation Technique: XGBoost
+    Introduction: >
+                  XGBoost, short for Extreme Gradient Boosting, is a highly acclaimed machine learning 
+                  algorithm renowned for its exceptional predictive accuracy and efficient handling of large datasets. 
+                  In this documentation, we delve into the intricacies of the XGBoost algorithm, its functioning, 
+                  and the significance of its essential hyperparameters.
+                        
+                  XGBoost falls within the gradient boosting family of algorithms, which leverages an ensemble 
+                  approach by combining predictions from multiple weak learners, typically decision trees. 
+                  The unique feature of gradient trained trees, progressively enhancing the model overall performance.
+    Core Features of XGBoost: |
+                              XGBoost offers several key features that make it a favored choice for machine learning tasks:
+                              
+                              1.  Regularization: Incorporating L1 (Lasso) and L2 (Ridge) regularization techniques, XGBoost effectively combats overfitting, a common challenge in machine learning.     
+                              2.  Sparsity Awareness: This algorithm excels at handling sparse data by optimizing memory usage and processing speed.
+                              3.  Customizable Objective Functions: Users can define their own loss functions and evaluation metrics, making it adaptable to a variety of problem domains.
+                              4.  Parallel and Distributed Computing: XGBoost capitalizes on multi-core processors and distributed computing frameworks, which accelerates model training on extensive datasets.
+                              5.  Out-of-the-Box Support for Missing Values: It adeptly manages missing data, reducing the need for extensive data preprocessing.
+                              6.  Cross-Validation: XGBoost includes built-in support for cross-validation, simplifying the hyperparameter tuning process and performance assessment.
+    How XGBoost works: |
+                        1.  Initial Prediction: XGBoost commences with an initial prediction, often set as the mean of the target variable for regression or the class distribution for classification.
+                        2.  Residual Calculation: It computes residuals, representing the differences between the actual target values and the current model\"s predictions.
+                        3.  Building Trees: XGBoost constructs decision trees to fit these residuals. Each iteration adds a new tree with the goal of minimizing the loss function.
+                        4.  Shrinkage: The algorithm employs a shrinkage parameter (learning rate) to control the step size during tree construction, enhancing robustness against overfitting.
+                        5.  Regularization: L1 and L2 regularization techniques penalize large coefficients and enable tree pruning to enhance model generalization.
+                        6.  Ensemble Building: The final prediction is a weighted sum of predictions from all trees in the ensemble.
+    Hyper Parameters: |
+                      Hyperparameters in XGBoost play a pivotal role in tailoring the models behavior and optimizing its performance. Here are some of the most crucial hyperparameters:
+                          
+                      1.  n_estimators: Defines the number of boosting rounds (trees) to be built, with higher values potentiallyleading to overfitting.
+                      2.  Learning_rate: The learning rate, or shrinkage parameter, governs the step size during tree construction.Smaller values require more boosting rounds but can enhance model generalization.                    
+                      3.  Max_depth: This hyperparameter determines the maximum depth of each decision tree, controlling modelcomplexity and guarding against overfitting.
+                      4.  Min_child_weight: Specifies the minimum sum of instance weight needed in a child node,helping control overfitting.
+                      5.  Gamma: A regularization parameter that sets a threshold for further node partitioning, with highervalues reducing the number of splits.
+                      6.  Subsample: Denotes the fraction of samples used for growing trees, with smaller values mitigating overfitting.
+                      7.  Colsample_bytree: Determines the fraction of features utilized for tree building, aiding in featureselection and overfitting prevention.
+                      8.  lambda (L2 regularization term) and alpha (L1 regularization term): Control the strengthof regularization in the model.
+                      9.  Objective: The loss function to optimize, such as "reg:squarederro" for regression or "binary:logistic"for binary classification.
+                      10. Eval_metric: The evaluation metric used during training, like "rmse" for regression and "logloss" for classification.
+                      11. Early_stopping_rounds: If specified, the model will halt training if no improvement is observed for aspecified number of rounds.
+                             
+                      These hyperparameters empower users to fine-tune the XGBoost model to match the specific requirements of their machine learning tasks.
+    Hyperparameter Optimization Technique - Bayesian Optimization: >
+                                                                    Bayesian Optimization is an advanced and effective optimization 
+                                                                    methodology that plays a pivotal role in the realm of machine 
+                                                                    learning, specifically in the context of hyperparameter tuning. 
+                                                                    By harnessing probabilistic modeling, it guides the selection of 
+                                                                    hyperparameters in a systematic and intelligent manner, leading to 
+                                                                    superior model performance. This section provides a comprehensive 
+                                                                    understanding of Bayesian Optimization, its mechanics, and its significant 
+                                                                    impact on the model development process.
+                                                                                  
+                                                                    Bayesian Optimization stands out as a sequential model-based optimization 
+                                                                    technique, tailored for the efficient exploration of hyperparameter configurations, 
+                                                                    particularly when the objective function is expensive or lacks an explicit 
+                                                                    analytical form. In the domain of machine learning, this objective 
+                                                                    function typically represents evaluation metrics that gauge a models 
+                                                                    performance. The central objective, thus elevating the model's overall performance.
+                                                                                            
+                                                                    Bayesian Optimization is endowed with a host of features that make it an 
+                                                                    indispensable tool in the model development process:
+                                                                                  
+                                                                    1.  Probabilistic Model: Bayesian Optimization capitalizes on probabilistic models, primarilyGaussian processes, to capture the intricate relationships between hyperparameters and the objective function.
+                                                                    
+                                                                    2.  Acquisition Functions: It makes use of acquisition functions to intelligently decide the nexthyperparameter configuration to evaluate, striking a balance between exploration (discoveringuncharted territories) and exploitation (exploiting promising regions).
+                                                                    
+                                                                    3.  Sequential Optimization: This optimization process unfolds sequentially, with the probabilisticmodel of the objective function being built and updated iteratively, rendering it significantlymore efficient than rudimentary methods like grid search or random search.
+                                                                    
+                                                                    4.  Model Selection: Bayesian Optimization extends its utility to the selection of the most suitablemachine learning model, optimizing hyperparameters for different model architectures.
+                                                                    
+                                                                    5.  Parallelization: It's adaptable to parallelization, allowing simultaneous evaluation of multiplehyperparameter configurations, thereby reducing optimization time.
+    Inner Workings of Bayesian Optimization: >   
+     
+                                              1.  Initial Random Exploration: Bayesian Optimization commences by performing an initial randomexploration, generating a set of random hyperparameter configurations to collect data pointsessential for constructing the initial probabilistic model.
+                                                 
+                                              2.  Probabilistic Modeling: It employs a probabilistic model, frequently a Gaussian process, to model the distribution of the objective function across the hyperparameter space. The modelestimates the mean and the uncertainty of the objective function.
+                                                  
+                                              3.  Acquisition Function: An acquisition function, such as Expected Improvement (EI) or Probabilityof Improvement (PI), takes center stage in deciding the subsequent hyperparameter configuration toevaluate. This function diligently balances exploration, by targeting unexplored regions, and exploitation, by concentrating on regions with high expected improvement.
+                                                  
+                                              4.  Objective Function Evaluation: The selected hyperparameter configuration undergoes evaluation on the objective function, and the outcome is employed to refine the probabilistic model.
+                                                 
+                                              5.  Iterative Procedure: Steps 3 and 4 constitute an iterative loop, continuing until a predefined stopping criterion is met, which could be a maximum number of iterations or a convergence threshold.
+                                                  
+                                              6.  Final Optimal Configuration: The ultimate and optimal hyperparameter configuration is identifiedbased on the probabilistic model's predictions
+
+                                              Harnessing the Power of Bayesian Optimization:
+                                                    
+                                              Bayesian Optimization emerges as a sophisticated and highly proficient 
+                                              approach to the intricate task of hyperparameter optimization in machine 
+                                              learning models. By virtue of its probabilistic modeling and smart acquisition 
+                                              functions, it deftly navigates the challenging and high-dimensional 
+                                              hyperparameter space to pinpoint configurations that propel the model's 
+                                              performance to new heights. Whether you're finetuning a model's hyperparameters 
+                                              or scrutinizing various model architectures, Bayesian Optimization serves as 
+                                              an invaluable asset in your machine learning toolkit, eliminating the need for 
+                                              exhaustive and resource-intensive hyperparameter searches.
+  Dependent Variable:
+    1. Target Variable Definition: ""
+    2. Business Judgement: <user input>
+    3. Statistical Analysis: "Roll-rate analysis and F-measure analysis were used to evaluate several bad definitions:
+                                
+
+                                \ta.  F-measure analysis: F-measure is a harmonic mean of a classifier's precision and recall. Here, precision is hi-rate, or precent of classified bads that are actually bad and recall is the percent of bads correctly labeled as such.
+                                
+                                \t<user input>
+
+                                
+                                \tb.  Roll rate analysis: Roll rate analysis involves comparing the delinquency status of two specified points in time and then calculating the percentage of accounts that maintain their delinquency, cure to current or a lower bucket or roll forward into a subsequent delinquency bucket. The purpose of this analysis is to determine the ideal classification between the level of delinquency and the corresponding account's On-us age from which account with a high probability of going bad are not curable.
+                                
+                                \t<user input>"
+                                
+                                
+                                
+  Variable transformation and selection: null
+  Final Model Selection: null
+
+Model Scope, Purpose and Use:
+    Main: >
+          This document describes the model design, model building, and model results for the new 
+          underwriting model for bank's <user input> portfolio. The new model will be used for 
+          underwriting (i.e., making the approve/decline decisions) new applications. The new score 
+          is expected to replace the existing score along with other policy criteria for new 
+          underwriting criteria. The new model is developed using advanced machine learning algorithm 
+          Xtreme Gradient Boost (XGBoost). Detailed information about model data, model development, 
+          evaluation and monitoring are covered in the subsequent sections. 
+         
+         
+          1.Model Data - This section covers the data used in the modeling process, including its source, 
+          quality, and relevance. 
+          
+          
+          2.Model Specification - This section outlines the specific details of the model, including 
+          algorithms, hyperparameters, and features used.
+          
+        
+          3.Model Testing and evaluation - This section focuses on the assessment of the models performance 
+          through testing, validation, and the chosen evaluation metrics. 
+          
+          
+          4.Model Implementation - This section describes the environment in which the model will be 
+          implemented, and the model scoring/execution process. 
+          
+          
+          Below table gives an overview of the product/portfolio to which the model will be applied, 
+          including key model usage across business strategies.
